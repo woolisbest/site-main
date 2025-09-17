@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>わかめtube</title>
+    <link rel="stylesheet" href="/css/page.css">
+    <script src="/js/tailwindcss.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="/js/tube.js"></script>
+    <style>
+        .hero-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50vh;
+            background-color: #2d3748;
+        }
+        .searchbox {
+            position: absolute;
+            transform: translate(-50%, 0%);
+            width: 80%;
+            max-width: 700px;
+            padding: 0.75rem;
+            font-size: 1.2rem;
+            border-radius: 25px;
+            border: none;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        .searchbox:focus {
+            background-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+        }
+        .app-card-container {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        .app-card {
+            background-color: #1a202c;
+            border-radius: 25px;
+            padding: 15px;
+            width: 180px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid #4a5568;
+        }
+        .app-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+        }
+        .app-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        .app-card h3 {
+            color: white;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+        .app-card p {
+            color: #cbd5e0;
+            font-size: 0.875rem;
+        }
+        footer {
+            background-color: #2d3748;
+            color: #cbd5e0;
+            padding: 1rem;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .logo img {
+            height: 30px;
+            width: auto;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 font-sans">
+
+    <header class="bg-gray-800 text-white p-4">
+        <nav class="flex justify-between items-center">
+            <a href="/?r=y" class="logo">
+                <img src="https://cdn.glitch.global/21c63086-ffc1-4d28-8e9a-e2c12f51b431/IMG_2121.jpeg">
+            </a>
+            <div class="space-x-6">
+                <button id="openSettings" class="hover:text-gray-300">⚙️設定</button>
+                <a href="/wkt/trend" class="hover:text-gray-300">🎩トレンド</a>
+                <a href="/wkt/cl/history" class="hover:text-gray-300">履歴</a>
+                <a href="/wkt/cl/fav" class="hover:text-gray-300">お気に入り</a>
+            </div>
+        </nav>
+    </header>
+  
+    <section class="hero-section">
+        <div class="text-center">
+            <a href="/blog/b/wkthelp"><h1 class="text-4xl font-bold text-white mb-4">わかめtube</h1></a>
+            <p class="text-lg text-gray-400 mb-6">好きな動画を検索してみましょう！</p>
+            <form action="/wkt/s" method="get" id="searchForm">
+              <input type="text" name="q" id="searchbox" placeholder="キーワード、もしくはYouTubeのURLを入力..." class="searchbox">
+            </form>
+        </div>
+    </section>
+
+    <section class="py-10 px-4 bg-gray-800">
+
+        <div class="app-card-container">
+            <div class="app-card">
+                <a href="/proxy">
+                <img src="https://cdn.glitch.global/21c63086-ffc1-4d28-8e9a-e2c12f51b431/IMG_2940.jpeg">
+                </a>
+                <h3>PROXE!!</h3>
+                <p>Proxyを見つけて、使う。</p>
+            </div>
+            <div class="app-card">
+                <a href="/game">
+                <img src="https://cdn.glitch.global/21c63086-ffc1-4d28-8e9a-e2c12f51b431/IMG_2941.png">
+                </a>
+                <h3>APP</h3>
+                <p>Webゲームをプレイ。</p>
+            </div>
+            <div class="app-card">
+                <a href="/tools">
+                <img src="https://cdn.glitch.global/21c63086-ffc1-4d28-8e9a-e2c12f51b431/IMG_2945.jpeg">
+                </a>
+                <h3>ツール</h3>
+                <p>あなたを助けるかもしれない</p>
+            </div>
+            <div class="app-card">
+                <a href="mailto:woolisbest.4520@gmail.com">
+                <img src="https://cdn.glitch.global/21c63086-ffc1-4d28-8e9a-e2c12f51b431/IMG_2944.png">
+                </a>
+                <h3>お問い合わせ</h3>
+                <p>サイトの管理者に問い合わせる</p>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <p>♪( ´▽｀)</p>
+    </footer>
+</body>
+</html>
