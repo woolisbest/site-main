@@ -9,18 +9,22 @@ export async function proxyHandler(req, res) {
     return res.status(400).send('Missing URL parameter');
   }
 
+  const options = {
+    method: req.method, // GETまたはPOST
+    headers: req.headers, // クライアントから送られたヘッダを転送
+    body: req.method === 'POST' ? req.body : null, // POSTリクエストの場合はbodyを転送
+  };
+
   try {
-    const response = await fetch(targetUrl);
+    const response = await fetch(targetUrl, options);
     const contentType = response.headers.get('content-type') || '';
 
-    // HTML の場合は書き換え、それ以外はそのまま転送
     if (contentType.includes('text/html')) {
       const html = await response.text();
       const rewritten = rewriteHtml(html, targetUrl);
       res.setHeader('Content-Type', 'text/html');
       res.send(rewritten);
     } else {
-      // 画像・CSS・JSなどはそのままpipe
       res.setHeader('Content-Type', contentType);
       response.body.pipe(res);
     }
