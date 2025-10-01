@@ -12,7 +12,7 @@ A lightweight web proxy built with Node.js and Express, designed for educational
 ## Usage
 
 ```bash
-git clone https://github.com/yourusername/simple-node-proxy.git
+git clone https://github.com/woolisbest-4520/site.git
 cd simple-node-proxy
 npm install
 npm start
