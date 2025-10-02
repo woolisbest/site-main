@@ -151,6 +151,122 @@
     </div>
   </div>
 
-  <script>
-    let vmRunning = false;
-    const terminal = document.getElementById("terminal");
+<script>
+  let vmRunning = false;
+  const terminal = document.getElementById("terminal");
+  const vmState = document.getElementById("vmState");
+  const input = document.getElementById("commandInput");
+  const runBtn = document.getElementById("runBtn");
+
+  function setCommandEnabled(enabled) {
+    input.disabled = !enabled;
+    runBtn.disabled = !enabled;
+  }
+
+  function startVM() {
+    if (vmRunning) {
+      appendTerminal("VMはすでに起動しています。");
+      return;
+    }
+    vmRunning = true;
+    vmState.textContent = "稼働中";
+    vmState.style.color = "lime";
+    appendTerminal("仮想マシンを起動中...");
+    setCommandEnabled(true);
+  }
+
+  function stopVM() {
+    if (!vmRunning) {
+      appendTerminal("VMはすでに停止しています。");
+      return;
+    }
+    vmRunning = false;
+    vmState.textContent = "停止中";
+    vmState.style.color = "red";
+    appendTerminal("仮想マシンを停止しました。");
+    setCommandEnabled(false);
+  }
+
+  function restartVM() {
+    if (!vmRunning) {
+      appendTerminal("VMは停止中です。起動してから再起動してください。");
+      return;
+    }
+    appendTerminal("仮想マシンを再起動しています...");
+    setTimeout(() => {
+      appendTerminal("仮想マシンが再起動されました。");
+    }, 1000);
+  }
+
+  function runCommand() {
+    const command = input.value.trim();
+    if (!command) return;
+
+    appendTerminal(`> ${command}`);
+
+    switch (command.toLowerCase()) {
+      case "help":
+        appendTerminal("使用可能なコマンド: help, date, uname, ls, top, shutdown, df, uptime, clear");
+        break;
+      case "date":
+        appendTerminal("現在日時: " + new Date().toLocaleString());
+        break;
+      case "uname":
+        appendTerminal("Linux UbuntuVM 5.15.0-92-generic x86_64");
+        break;
+      case "ls":
+        appendTerminal("Desktop  Documents  Downloads  Music  Pictures  Videos");
+        break;
+      case "top":
+        appendTerminal("仮想プロセス:\nPID  USER   TIME  COMMAND\n1234 user  0:00  bash\n5678 user  0:01  sshd");
+        break;
+      case "shutdown":
+        appendTerminal("仮想マシンをシャットダウンします...");
+        setTimeout(() => {
+          appendTerminal("仮想マシンはシャットダウンしました。");
+          stopVM();
+        }, 2000);
+        break;
+      case "df":
+        appendTerminal("Filesystem     1K-blocks    Used Available Use% Mounted on\n/dev/sda1       10240000  2048000  8192000  25% /");
+        break;
+      case "uptime":
+        appendTerminal("システム稼働時間: 2:30:45 up 3 days,  5:23,  1 user,  load average: 0.15, 0.25, 0.31");
+        break;
+      case "clear":
+        terminal.textContent = "";
+        break;
+      default:
+        appendTerminal("コマンドが見つかりません: " + command);
+    }
+
+    input.value = "";
+  }
+
+  function appendTerminal(text) {
+    terminal.textContent += "\n" + text;
+    terminal.scrollTop = terminal.scrollHeight;
+  }
+
+  function handleKey(e) {
+    if (e.key === "Enter") {
+      runCommand();
+    }
+  }
+
+  // テーマ切替
+  function toggleTheme() {
+    const current = document.documentElement.getAttribute("data-theme");
+    const next = current === "light" ? "dark" : "light";
+    document.documentElement.setAttribute("data-theme", next);
+    localStorage.setItem("theme", next);
+  }
+
+  // 初期化（テーマ）
+  (function initTheme() {
+    const saved = localStorage.getItem("theme") || "dark";
+    document.documentElement.setAttribute("data-theme", saved);
+  })();
+</script>
+</body>
+</html>
