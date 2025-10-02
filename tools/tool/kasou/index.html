@@ -1,3 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>仮想マシン ターミナル</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <button class="theme-toggle" onclick="toggleTheme()">🌙 / ☀</button>
+
+  <div class="container">
+    <h1>仮想マシン ターミナル</h1>
+
+    <div class="login-screen" id="loginScreen">
+      <p>ユーザー名を入力してください:</p>
+      <input type="text" id="usernameInput" placeholder="user" />
+      <button onclick="login()">ログイン</button>
+    </div>
+
+    <div class="vm-interface" id="vmInterface" style="display: none;">
+      <div class="vm-status">
+        仮想マシン名: <span id="vmName">Ubuntu VM</span><br />
+        状態: <span id="vmState" style="color: red;">停止中</span><br />
+        ログイン中ユーザー: <span id="currentUser">-</span>
+      </div>
+
+      <div class="controls">
+        <button onclick="startVM()">起動</button>
+        <button onclick="stopVM()">停止</button>
+        <button onclick="restartVM()">再起動</button>
+      </div>
+
+      <div class="terminal" id="terminal">
+        仮想マシン ターミナルです。コマンドを入力してください。
+      </div>
+
+      <div class="input-area">
+        <span id="prompt">user@ubuntu:~$</span>
+        <input type="text" id="commandInput" placeholder="コマンドを入力" onkeydown="handleKey(event)" disabled />
+      </div>
+    </div>
+  </div>
+
+  <script src="filesystem.js"></script>
+  <script src="terminal.js"></script>
+</body>
+</html>
 
 
 
